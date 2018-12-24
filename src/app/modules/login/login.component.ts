@@ -5,8 +5,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { LoginService } from './login.service';
 import { LoginFormModel } from './login-form.model';
-import { FilterActivesPipe } from '../core/filter-actives.pipe';
-import { Group } from '../core/models/group-interface';
+import { GroupService } from './group.service';
+import { subscribeOn } from 'rxjs/operators';
 
 interface JSONResponse {
   groups: Group[];
@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
 
   formModel: LoginFormModel;
   isLoading: boolean;
-  groups: Group[] = [];
+  groups = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -38,11 +38,11 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.data
-      .subscribe((data: JSONResponse) => {
-        this.groups = this.filterActives.transform(data.groups);
-      });
+    this.route.data.subscribe((data: { groups: Group[] }) => {
+      this.groups = data.groups;
+    });
   }
+
   submit() {
     if (this.loginForm.valid) {
       this.isLoading = true;
@@ -58,4 +58,10 @@ export class LoginComponent implements OnInit {
          });
     }
   }
+}
+
+interface Group {
+  id: string;
+  value: string;
+  active: boolean;
 }

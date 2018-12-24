@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
-import { retry } from 'rxjs/operators';
+import { retry, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +13,15 @@ export class RegisterService {
     private http: HttpClient
   ) { }
 
-  register(user): Observable<void> {
+
+  register(user): Observable<any> {
     return this.http
-      .post<void>(environment.endpoint.register, user)
-      .pipe(
-        retry(2)
-      );
+    .post<any>(environment.endpoint.register, user)
+    .pipe(
+      retry(2),
+      map(response => {
+        return response.fullName;
+      })
+    );
   }
 }

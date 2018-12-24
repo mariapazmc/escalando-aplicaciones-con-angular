@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
-import { Validators } from 'src/app/modules/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RegisterService } from './register.service';
+import { Alert } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-register',
@@ -10,17 +10,15 @@ import { RegisterService } from './register.service';
 })
 export class RegisterComponent implements OnInit {
 
-  isLoading = false;
+form = new FormGroup({
+  fullName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]),
+  email: new FormControl('', [Validators.required, Validators.email, Validators.minLength(3)]),
+  password: new FormControl('', [Validators.required, Validators.minLength(5)])
+});
 
-  form = new FormGroup({
-    fullName: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    email: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    password: new FormControl('', [Validators.required, Validators.minLength(3)]),
-  });
+isLoading = false;
 
-  constructor(
-    private registerService: RegisterService
-  ) { }
+  constructor(private registerService: RegisterService) { }
 
   ngOnInit() {
   }
@@ -28,12 +26,13 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
     if (this.form.valid) {
       this.isLoading = true;
-
       this.registerService
       .register(this.form.value)
-      .subscribe(() => {
+      .subscribe((response) => {
         this.isLoading = false;
-      }, (reason) => {
+        alert(JSON.stringify(response));
+      },
+      (reason) => {
         this.isLoading = false;
         alert(JSON.stringify(reason));
       });

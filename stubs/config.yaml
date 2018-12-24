@@ -43,36 +43,18 @@
   response:
     - status: 500
       latency: 500
-      headers: 
+
+      headers:
         content-type: application/json
     - status: 500
-      latency: 1000
+      latency: 500
       headers:
         content-type: application/json
     - status: 200
-      latency: 3000
-      headers: 
-        content-type: application/json
-      file: ./user.json
-
-- request:
-    url: ^/admin/v1/users$
-    method: POST
-  response:
-    - status: 201
       latency: 500
-      headers: 
-        content-type: application/json
-
-- request:
-    url: ^/admin/v1/users$
-    method: GET
-  response:
-    - status: 200
-      latency: 500
-      headers: 
-        content-type: application/json
-      file: ./users.json
+      headers:
+        content-type: application/json    
+  file: ./user.json
 
 - request:
     url: ^/auth-service/v1/groups$
@@ -83,3 +65,23 @@
     headers:
       content-type: application/json
     file: ./groups.json
+
+- request:
+    url: ^/auth-service/v1/users$
+    method: GET
+  response:
+    status: 200
+    latency: 1000
+    headers:
+      content-type: application/json
+    file: ./users.json
+
+- request:
+    url: ^/auth-service/v1/users$
+    method: POST
+  response:
+    status: 200
+    latency: 1000
+    headers:
+      content-type: application/json
+    file: ./users.json

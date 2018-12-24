@@ -4,14 +4,15 @@ import { LoginModule } from './modules/login';
 
 import { PageNotFoundComponent } from './modules/core';
 import { LoginComponent, AuthGuard } from './modules/login';
-import { ResolverService } from './modules/login/resolver.service';
+import { GroupsResolverService } from './modules/login/groups-resolver.service';
 
 const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
     resolve: {
-      groups: ResolverService
+
+      groups: GroupsResolverService
     }
   },
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
     path: '',
     loadChildren: './pages/home/home.module#HomeModule',
     canLoad: [AuthGuard]
+  },
+  {
+    path: 'admin',
+    loadChildren: './pages/admin/admin.module#AdminModule',
   },
   {
     path: '**',
