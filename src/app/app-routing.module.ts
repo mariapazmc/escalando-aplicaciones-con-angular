@@ -5,6 +5,7 @@ import { LoginModule } from './modules/login';
 import { PageNotFoundComponent } from './modules/core';
 import { LoginComponent, AuthGuard } from './modules/login';
 import { ResolverService } from './modules/login/resolver.service';
+import { AdminResolverService } from './pages/admin/admin-resolver.service';
 
 const routes: Routes = [
   {
@@ -17,6 +18,14 @@ const routes: Routes = [
   {
     path: 'register',
     loadChildren: './pages/register/register.module#RegisterModule',
+  },
+  {
+    path: 'admin',
+    loadChildren: './pages/admin/admin.module#AdminModule',
+    resolve: {
+      groups: ResolverService,
+      users: AdminResolverService
+    }
   },
   {
     path: '',
