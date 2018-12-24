@@ -4,6 +4,8 @@ import { LoginModule } from './modules/login';
 
 import { PageNotFoundComponent } from './modules/core';
 import { LoginComponent, AuthGuard } from './modules/login';
+import { AdminComponent } from './pages/admin/admin.component';
+import { AdminModule } from './pages/admin/admin.module';
 import { ResolverService } from './modules/login/resolver.service';
 
 const routes: Routes = [
@@ -24,6 +26,10 @@ const routes: Routes = [
     canLoad: [AuthGuard]
   },
   {
+    path: 'admin',
+    component: AdminComponent
+  },
+  {
     path: '**',
     component: PageNotFoundComponent
   }
@@ -32,7 +38,8 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes),
-    LoginModule
+    LoginModule,
+    AdminModule
   ],
   exports: [ RouterModule ]
 })

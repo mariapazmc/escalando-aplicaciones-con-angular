@@ -26,4 +26,20 @@ describe('workspace-project App', () => {
         expect(browser.getCurrentUrl()).toEqual(expectedUrl);
       });
   });
+
+  it('Titulos locos!', () => {
+    const titles = [
+      // 'What is love?',
+      // 'Baby dont hurt me',
+      // 'dont hurt me',
+      // 'no more (8)'
+      'What is Lorem Ipsum?',
+      'What is Lorem Ipsum?'
+    ];
+    const titleList = page.getCardTitles();
+
+    titles.forEach((title, index) => {
+      expect(titleList.get(index).getText()).toEqual(title);
+    });
+  });
 });

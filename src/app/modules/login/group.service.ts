@@ -4,9 +4,11 @@ import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Group } from '../core/models/group-interface';
+
 @Injectable()
 export class GroupService {
-groups: Group[] = [];
+  groups: Group[] = [];
+
   constructor(
     private http: HttpClient
   ) { }

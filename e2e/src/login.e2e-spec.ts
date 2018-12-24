@@ -20,6 +20,5 @@ describe('workspace-project Login', () => {
     // http://www.protractortest.org/#/api?view=ProtractorExpectedConditions.prototype.urlContains
     browser.wait(EC.urlIs(expectedUrl))
       .then(() => expect(browser.getCurrentUrl()).toEqual(expectedUrl));
-
   });
 });
