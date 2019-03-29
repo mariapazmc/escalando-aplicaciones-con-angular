@@ -7,9 +7,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ScholarshipPostulationsComponent implements OnInit {
 
+  postulationList: any[] = [];
+
   constructor() { }
 
   ngOnInit() {
+    this.postulationList = [
+      {
+        name: 'Sebastian ',
+        email: 'sebastian@boolean.cl',
+        reasons: 'Quiero ser un gran programador',
+        status: 'awaiting'
+      },
+      {
+        name: 'Gonzalo',
+        email: 'gonzalo@boolean.cl',
+        reasons: 'Quiero aprender',
+        status: 'rejected'
+      }
+    ]
   }
 
 }

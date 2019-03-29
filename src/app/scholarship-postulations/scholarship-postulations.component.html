@@ -1,3 +1,11 @@
-<p>
-  scholarship-postulations works!
-</p>
+
+<main class="scholarship-postulations__page">
+  <section>
+    <ol class="scholarship-postulations__list">
+      <li *ngFor="let person of postulationList" class="scholarship-postulations__item">
+        <span>{{ person.name }} - {{ person.email }}</span>
+        <span class="scholarship-postulations__item--{{ person.status }}">{{ person.status }}</span>
+      </li>
+    </ol>
+  </section>
+</main>
