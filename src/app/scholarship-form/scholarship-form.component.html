@@ -1,14 +1,43 @@
-<p>
-  scholarship-form works!
-</p>
+<h1>
+  Formulario de postulación
+</h1>
 
-<div>
-  <input type="text" class="scholarship-form-page__name">
-  <input type="text" class="scholarship-form-page__email">
-</div>
-<textarea class="scholarship-form-page__reason" rows="4" cols="50">
-At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies. 
-</textarea>
+<form (ngSubmit)="onSubmit()" #scholarshipForm="ngForm">
+  <div class="form-group">
+    <label for="name">Nombre</label>
+    <input type="text" class="scholarship-form-page__name form-control" id="name" required
+    [(ngModel)]="model.name" name="name" #name="ngModel">
+    <div [hidden]="name.valid || name.pristine"
+     class="alert alert-danger">
+     Name is required
+     </div>
+  </div>
 
-<p class="scholarship-form-page__result-text">Mensaje enviado con éxito</p>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" class="scholarship-form-page__email form-control" id="email" required
+    [(ngModel)]="model.email" name="email" #email="ngModel">
+    <div [hidden]="email.valid || email.pristine"
+    class="alert alert-danger">
+    Email is required
+    </div>
+  </div>
 
+  <div class="form-group">
+    <label for="reason">Motivo</label>
+    <textarea class="scholarship-form-page__reason form-control" id="reason" required
+    [(ngModel)]="model.reason" name="reason" #reason="ngModel"></textarea>
+    <div [hidden]="reason.valid || reason.pristine"
+    class="alert alert-danger">
+    Reason is required
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-success scholarship-form-page__submit"
+  [disabled]="!scholarshipForm.form.valid">Postular</button>
+
+</form>
+
+{{diagnostic}}
+
+<p *ngIf="submitted" class="scholarship-form-page__result-text">Mensaje enviado con éxito</p>
